@@ -1,0 +1,72 @@
+//
+//  ViewController.swift
+//  ArbuzFresh
+//
+//  Created by Mereke on 19.05.2023.
+//
+
+import UIKit
+import SnapKit
+
+class HomeViewController: UIViewController {
+    
+    var dataDisplayManager = HomeDataDisplayManager()
+
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.contentInset = .zero
+        tableView.separatorInset = .zero
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
+
+    private let searchController: UISearchController = {
+        let searchcontroller = UISearchController(searchResultsController: nil)
+        searchcontroller.obscuresBackgroundDuringPresentation = false
+        searchcontroller.searchBar.placeholder = "Поиск"
+        return searchcontroller
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setNavBar()
+        setupTableView()
+    }
+
+    private func setupTableView() {
+        tableView.dataSource = dataDisplayManager
+        tableView.delegate = dataDisplayManager
+        tableView.register(CategoriesTableCell.self, forCellReuseIdentifier: CategoriesTableCell.identifier)
+        tableView.register(BannerTableCell.self, forCellReuseIdentifier: BannerTableCell.reuseIdentifier)
+
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+
+    private func setNavBar() {
+        title = "Arbuz.Fresh"
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Гагарина 292"
+        titleLabel.textColor = .systemGreen
+
+        let chevronDownImage = UIImage(systemName: "location")
+        let chevronDownImageView = UIImageView(image: chevronDownImage)
+        chevronDownImageView.tintColor = .systemGreen
+
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(customView: titleLabel),
+            UIBarButtonItem(customView: chevronDownImageView)
+        ]
+    }
+}
