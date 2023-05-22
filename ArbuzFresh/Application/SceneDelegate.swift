@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let mainVC = UINavigationController(rootViewController: FoodViewController())
+        let mainVC = UINavigationController(rootViewController: HomeViewController())
         mainVC.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "house"), tag: 0)
 
         let groceryBasketVC = UINavigationController(rootViewController: FoodViewController())
