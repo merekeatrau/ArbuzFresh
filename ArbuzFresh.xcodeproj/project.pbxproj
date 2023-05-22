@@ -20,7 +20,9 @@
 		621EE4032A17DCEF0014C203 /* CategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621EE4022A17DCEF0014C203 /* CategoriesCollectionView.swift */; };
 		621EE4052A17DD240014C203 /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621EE4042A17DD240014C203 /* CategoryCollectionCell.swift */; };
 		621EE40F2A1ABBD80014C203 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621EE40E2A1ABBD80014C203 /* FoodViewController.swift */; };
-		621EE4122A1ABF270014C203 /* ProductTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621EE4112A1ABF270014C203 /* ProductTableCell.swift */; };
+		621EE4122A1ABF270014C203 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621EE4112A1ABF270014C203 /* ProductCollectionCell.swift */; };
+		626DE4762A1B847A009B31E8 /* BusketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DE4752A1B847A009B31E8 /* BusketViewController.swift */; };
+		626DE4792A1B9386009B31E8 /* ProductTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626DE4782A1B9386009B31E8 /* ProductTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +40,9 @@
 		621EE4022A17DCEF0014C203 /* CategoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionView.swift; sourceTree = "<group>"; };
 		621EE4042A17DD240014C203 /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
 		621EE40E2A1ABBD80014C203 /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
-		621EE4112A1ABF270014C203 /* ProductTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableCell.swift; sourceTree = "<group>"; };
+		621EE4112A1ABF270014C203 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
+		626DE4752A1B847A009B31E8 /* BusketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusketViewController.swift; sourceTree = "<group>"; };
+		626DE4782A1B9386009B31E8 /* ProductTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				626DE4742A1B6660009B31E8 /* Model */,
 				621EE4012A17DC9C0014C203 /* Home */,
 				621EE4102A1ABBDC0014C203 /* Food */,
+				626DE4772A1B9192009B31E8 /* Busket */,
 				621EE3F72A17D1D00014C203 /* SupportingFiles */,
 				621EE3E82A17D0A00014C203 /* ArbuzFresh.xcdatamodeld */,
 			);
@@ -134,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				621EE40E2A1ABBD80014C203 /* FoodViewController.swift */,
-				621EE4112A1ABF270014C203 /* ProductTableCell.swift */,
+				621EE4112A1ABF270014C203 /* ProductCollectionCell.swift */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -144,6 +149,15 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		626DE4772A1B9192009B31E8 /* Busket */ = {
+			isa = PBXGroup;
+			children = (
+				626DE4752A1B847A009B31E8 /* BusketViewController.swift */,
+				626DE4782A1B9386009B31E8 /* ProductTableCell.swift */,
+			);
+			path = Busket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +238,7 @@
 			files = (
 				621EE3E42A17D0A00014C203 /* HomeViewController.swift in Sources */,
 				621EE3E02A17D0A00014C203 /* AppDelegate.swift in Sources */,
+				626DE4762A1B847A009B31E8 /* BusketViewController.swift in Sources */,
 				621EE4002A17DC910014C203 /* CategoriesTableCell.swift in Sources */,
 				621EE4032A17DCEF0014C203 /* CategoriesCollectionView.swift in Sources */,
 				621EE3FC2A17D3EA0014C203 /* HomeDataDisplayManager.swift in Sources */,
@@ -232,7 +247,8 @@
 				621EE3FE2A17DBF80014C203 /* BannerTableCell.swift in Sources */,
 				621EE3E22A17D0A00014C203 /* SceneDelegate.swift in Sources */,
 				621EE3EA2A17D0A00014C203 /* ArbuzFresh.xcdatamodeld in Sources */,
-				621EE4122A1ABF270014C203 /* ProductTableCell.swift in Sources */,
+				621EE4122A1ABF270014C203 /* ProductCollectionCell.swift in Sources */,
+				626DE4792A1B9386009B31E8 /* ProductTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,7 @@ class ProductCollectionCell: UICollectionViewCell {
     static let reuseIdentifier = "ProductCollectionCell"
     
     private let bannerImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "fruits"))
+        let imageView = UIImageView(image: UIImage(named: "banana"))
         imageView.backgroundColor = UIColor.systemGray6
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
