@@ -7,8 +7,20 @@
 
 import UIKit
 
-class CategoriesCollectionView: UIView {
+protocol SubcategoryCellDelegate: AnyObject {
+    func didSelectSubcategoryCellDelegate(with subcategory: Int)
+}
 
+class CategoriesCollectionView: UIView {
+    
+    weak var subcategoryDelegate: SubcategoryCellDelegate?
+    
+    var subcategories: [Subcategory] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -17,23 +29,23 @@ class CategoriesCollectionView: UIView {
         let collectionview = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionview
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(collectionView)
         collectionView.dataSource = self
-        collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = false
-
-        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
+        
+        collectionView.register(CategoryCollectionCell.self, forCellWithReuseIdentifier: CategoryCollectionCell.identifier)
 
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,14 +55,17 @@ extension CategoriesCollectionView: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionCell.identifier, for: indexPath) as! CategoryCollectionCell
+        let subcategory = subcategories[indexPath.row]
+        cell.titleLabel.text = subcategory.rawValue
+        cell.posterImageView.image = UIImage(named: subcategory.coverImageUrl)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        subcategoryDelegate?.didSelectSubcategoryCellDelegate(with: 1)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

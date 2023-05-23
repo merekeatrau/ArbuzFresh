@@ -14,17 +14,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let mainVC = UINavigationController(rootViewController: BusketViewController())
+        let mainVC = UINavigationController(rootViewController: HomeViewController())
         mainVC.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "house"), tag: 0)
 
-        let groceryBasketVC = UINavigationController(rootViewController: FoodViewController())
+        let groceryBasketVC = UINavigationController(rootViewController: BusketViewController())
         groceryBasketVC.tabBarItem = UITabBarItem(title: "Корзина", image: UIImage(systemName: "basket"), tag: 1)
 
-        let profileVC = UINavigationController(rootViewController: UIViewController())
+        let profileVC = UINavigationController(rootViewController: ProfileViewController())
         profileVC.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.circle"), tag: 2)
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [mainVC, groceryBasketVC, profileVC]
+
+        let selectedColor = UIColor.systemGreen
+        UITabBar.appearance().tintColor = selectedColor
+        UITabBar.appearance().unselectedItemTintColor = .gray
 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = tabBarController

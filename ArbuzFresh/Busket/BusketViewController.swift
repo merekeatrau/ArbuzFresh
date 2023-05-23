@@ -18,13 +18,6 @@ class BusketViewController: UIViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
-    
-    private let searchController: UISearchController = {
-        let searchcontroller = UISearchController(searchResultsController: nil)
-        searchcontroller.obscuresBackgroundDuringPresentation = false
-        searchcontroller.searchBar.placeholder = "Поиск"
-        return searchcontroller
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,19 +42,16 @@ class BusketViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-
-        let titleLabel = UILabel()
-        titleLabel.text = "Гагарина 292"
-        titleLabel.textColor = .systemGreen
+        let addressLabel = UILabel()
+        addressLabel.text = "Гагарина 292"
+        addressLabel.textColor = .systemGreen
 
         let chevronDownImage = UIImage(systemName: "location")
         let chevronDownImageView = UIImageView(image: chevronDownImage)
         chevronDownImageView.tintColor = .systemGreen
 
         navigationItem.leftBarButtonItems = [
-            UIBarButtonItem(customView: titleLabel),
+            UIBarButtonItem(customView: addressLabel),
             UIBarButtonItem(customView: chevronDownImageView)
         ]
     }

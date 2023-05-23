@@ -58,16 +58,16 @@ class FoodViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        let titleLabel = UILabel()
-        titleLabel.text = "Фильтры"
-        titleLabel.textColor = .systemGreen
+        let filterLabel = UILabel()
+        filterLabel.text = "Фильтры"
+        filterLabel.textColor = .systemGreen
         
         let chevronDownImage = UIImage(systemName: "slider.horizontal.3")
         let chevronDownImageView = UIImageView(image: chevronDownImage)
         chevronDownImageView.tintColor = .systemGreen
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(customView: titleLabel),
+            UIBarButtonItem(customView: filterLabel),
             UIBarButtonItem(customView: chevronDownImageView)
         ]
     }

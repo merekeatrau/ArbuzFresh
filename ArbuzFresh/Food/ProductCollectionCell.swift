@@ -21,7 +21,7 @@ class ProductCollectionCell: UICollectionViewCell {
         return imageView
     }()
 
-    private let titleLabel: UILabel = {
+    private let productLabel: UILabel = {
         let label = UILabel()
         label.text = "Яблоко голден Ред Принц Польша, кг"
         label.textColor = .black
@@ -65,7 +65,7 @@ class ProductCollectionCell: UICollectionViewCell {
     
     private func setupViews() {
         contentView.addSubview(stackView)
-        [bannerImageView, titleLabel, priceButton].forEach { stackView.addArrangedSubview($0) }
+        [bannerImageView, productLabel, priceButton].forEach { stackView.addArrangedSubview($0) }
     }
     
     private func setupConstraints() {
@@ -82,7 +82,7 @@ class ProductCollectionCell: UICollectionViewCell {
     }
     
     func configure(with title: String, price: String) {
-        titleLabel.text = title
+        productLabel.text = title
         priceButton.setTitle(price, for: .normal)
     }
 }

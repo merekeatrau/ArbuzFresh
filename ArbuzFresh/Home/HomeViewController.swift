@@ -34,6 +34,9 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         setNavBar()
         setupTableView()
+        dataDisplayManager.onSubcategoryDidSelect = { [weak self] movieId in
+            self?.navigationController?.pushViewController(FoodViewController(), animated: true)
+        }
     }
 
     private func setupTableView() {
@@ -49,23 +52,23 @@ class HomeViewController: UIViewController {
     }
 
     private func setNavBar() {
-        title = "Arbuz.Fresh"
+        title = "Arbuz Fresh"
 
         navigationController?.navigationBar.prefersLargeTitles = true
 
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
 
-        let titleLabel = UILabel()
-        titleLabel.text = "Гагарина 292"
-        titleLabel.textColor = .systemGreen
+        let addressLabel = UILabel()
+        addressLabel.text = "Гагарина 292"
+        addressLabel.textColor = .systemGreen
 
         let chevronDownImage = UIImage(systemName: "location")
         let chevronDownImageView = UIImageView(image: chevronDownImage)
         chevronDownImageView.tintColor = .systemGreen
 
         navigationItem.leftBarButtonItems = [
-            UIBarButtonItem(customView: titleLabel),
+            UIBarButtonItem(customView: addressLabel),
             UIBarButtonItem(customView: chevronDownImageView)
         ]
     }

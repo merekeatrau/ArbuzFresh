@@ -23,7 +23,7 @@ class ProductTableCell: UITableViewCell {
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private let foodLabel: UILabel = {
         let label = UILabel()
         label.text = "Сметана Простоквашино 15%, 300гр"
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -56,7 +56,7 @@ class ProductTableCell: UITableViewCell {
     }()
     
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, closeButton])
+        let stackView = UIStackView(arrangedSubviews: [foodLabel, closeButton])
         stackView.axis = .horizontal
         
         stackView.alignment = .top
@@ -68,7 +68,6 @@ class ProductTableCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [stackView, priceLabel])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-//        stackView.backgroundColor = .blue.withAlphaComponent(0.5)
         return stackView
     }()
     

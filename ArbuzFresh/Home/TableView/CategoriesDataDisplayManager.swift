@@ -9,8 +9,8 @@ import UIKit
 
 final class HomeDataDisplayManager: NSObject, UITableViewDataSource, UITableViewDelegate  {
     
-    var onMovieDidSelect: ((Int) -> Void)?
-    
+    var onSubcategoryDidSelect: ((Int) -> Void)?
+        
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -23,8 +23,19 @@ final class HomeDataDisplayManager: NSObject, UITableViewDataSource, UITableView
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: BannerTableCell.reuseIdentifier, for: indexPath)
             return cell
-        } else {
+        }
+        if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTableCell.identifier, for: indexPath) as! CategoriesTableCell
+            cell.categoryLabel.text = "Свежие овощи и фрукты"
+            cell.products = products[.fruitsAndVegetables] ?? []
+            cell.onSubcategoryDidSelect = onSubcategoryDidSelect
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTableCell.identifier, for: indexPath) as! CategoriesTableCell
+            cell.categoryLabel.text = "Молочные продукты"
+            cell.products = products[.milkProducts] ?? []
+            cell.onSubcategoryDidSelect = onSubcategoryDidSelect
             return cell
         }
     }
@@ -32,15 +43,12 @@ final class HomeDataDisplayManager: NSObject, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return UITableView.automaticDimension
-            
         } else {
             return tableView.frame.height * 0.33
-            
         }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.height / 3
     }
-    
 }

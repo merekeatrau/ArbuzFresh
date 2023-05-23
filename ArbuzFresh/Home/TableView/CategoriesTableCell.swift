@@ -7,24 +7,37 @@
 
 import UIKit
 
-class CategoriesTableCell: UITableViewCell {
+class CategoriesTableCell: UITableViewCell, SubcategoryCellDelegate {
+    
+    static let identifier = "CategoriesTableCell"
+    
+    var onSubcategoryDidSelect: ((Int) -> Void)?
+    
+    func didSelectSubcategoryCellDelegate(with subcategory: Int) {
+        onSubcategoryDidSelect?(subcategory)
+    }
 
-    static let identifier = "HomeViewTableCell"
-
-    var onMovieDidSelect: ((Int) -> Void)?
-
-    func didSelectMovie(with id: Int) {
-        onMovieDidSelect?(id)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        categoryLabel.text = nil
+        collectionView.subcategories = []
+        collectionView.collectionView.reloadData()
     }
     
-    private let titleLabel: UILabel = {
-         let label = UILabel()
-         label.text = "Свежие овощи и фрукты"
-         label.font = .systemFont(ofSize: 16, weight: .medium)
-         return label
-     }()
+    var products: [[Product]] = [] {
+        didSet {
+            collectionView.subcategories = products.map { $0[0].subcategory }
+            collectionView.collectionView.reloadData()
+        }
+    }
+    
+    var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        return label
+    }()
 
-    private let collectionView = CategoriesCollectionView()
+    let collectionView = CategoriesCollectionView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,19 +49,20 @@ class CategoriesTableCell: UITableViewCell {
     }
 
     private func configureUI() {
-        
+        collectionView.subcategories = products.map { $0[0].subcategory }
+        collectionView.subcategoryDelegate = self
         selectionStyle = .none
-        
-        contentView.addSubview(titleLabel)
+
+        contentView.addSubview(categoryLabel)
         contentView.addSubview(collectionView)
-        
-        titleLabel.snp.makeConstraints {
+
+        categoryLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
-        
+
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(categoryLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
