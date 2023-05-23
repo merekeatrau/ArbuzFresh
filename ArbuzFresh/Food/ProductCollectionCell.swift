@@ -7,17 +7,20 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class ProductCollectionCell: UICollectionViewCell {
-
+        
     static let reuseIdentifier = "ProductCollectionCell"
-    
+            
+    private var product: Product?
+        
     override func prepareForReuse() {
         super.prepareForReuse()
         bannerImageView.image = nil
         productLabel.text = nil
     }
-    
+        
     private let bannerImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "banana"))
         imageView.backgroundColor = UIColor.systemGray6
@@ -26,7 +29,7 @@ class ProductCollectionCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-
+    
     private let productLabel: UILabel = {
         let label = UILabel()
         label.text = "Яблоко голден Ред Принц Польша, кг"
@@ -48,6 +51,7 @@ class ProductCollectionCell: UICollectionViewCell {
             .withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.setTitle("633₸", for: .normal)
+        button.addTarget(self, action: #selector(priceButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -72,6 +76,7 @@ class ProductCollectionCell: UICollectionViewCell {
     private func setupViews() {
         contentView.addSubview(stackView)
         [bannerImageView, productLabel, priceButton].forEach { stackView.addArrangedSubview($0) }
+        
     }
     
     private func setupConstraints() {
@@ -88,6 +93,7 @@ class ProductCollectionCell: UICollectionViewCell {
     }
     
     func configure(product: Product) {
+        self.product = product
         bannerImageView.image = UIImage(named: "\(product.imageUrl)")
         productLabel.text = "\(product.name), \(product.type.rawValue)"
         let priceString = String(format: "%.2f₸", product.price)
@@ -95,18 +101,34 @@ class ProductCollectionCell: UICollectionViewCell {
     }
 }
 
-class PriceButton: UIButton {
-    let spacing: CGFloat = 10.0
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        if let imageView = imageView, let titleLabel = titleLabel {
-            imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
-            titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
-            
-            let insetAmount = spacing / 2 + min(imageView.frame.width, titleLabel.frame.width) / 2
-            contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
+extension ProductCollectionCell {
+    
+    @objc private func priceButtonTapped() {
+        guard let product = product else {
+            return
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "ProductEntity", in: context)!
+        let productEntity = NSManagedObject(entity: entity, insertInto: context)
+        
+        productEntity.setValue(product.id, forKey: "id")
+        productEntity.setValue(product.name, forKey: "name")
+        productEntity.setValue(product.category.rawValue, forKey: "category")
+        productEntity.setValue(product.subcategory.rawValue, forKey: "subcategory")
+        productEntity.setValue(product.type.rawValue, forKey: "type")
+        productEntity.setValue(product.price, forKey: "price")
+        productEntity.setValue(product.imageUrl, forKey: "imageUrl")
+        
+        do {
+            try context.save()
+            NotificationCenter.default.post(name: .productAddedToCart, object: nil, userInfo: ["product": product])
+        } catch {
+            print(error)
         }
     }
 }
+

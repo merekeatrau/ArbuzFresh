@@ -12,7 +12,7 @@ class ProductTableCell: UITableViewCell {
     static let identifier = "ProductTableCell"
 
     private let bannerImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "banana"))
+        let imageView = UIImageView()
         imageView.backgroundColor = UIColor.systemGray6
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
@@ -22,10 +22,9 @@ class ProductTableCell: UITableViewCell {
         }
         return imageView
     }()
-    
+        
     private let foodLabel: UILabel = {
         let label = UILabel()
-        label.text = "Сметана Простоквашино 15%, 300гр"
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 2
         return label
@@ -33,32 +32,17 @@ class ProductTableCell: UITableViewCell {
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "633 ₸"
         label.textColor = .black
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
     }()
-    
-    private let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .black.withAlphaComponent(0.4)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.contentHorizontalAlignment = .fill
-        button.contentVerticalAlignment = .fill
-        button.snp.makeConstraints { make in
-            make.width.equalTo(12)
-            make.height.equalTo(12)
-        }
-        return button
-    }()
-    
+
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [foodLabel, closeButton])
+        let stackView = UIStackView(arrangedSubviews: [foodLabel])
         stackView.axis = .horizontal
-        
+        stackView.spacing = 12
         stackView.alignment = .top
         return stackView
     }()
@@ -88,6 +72,18 @@ class ProductTableCell: UITableViewCell {
         }
 
     }
+
+    func configure(with product: ProductEntity) {
+        if let imageData = product.imageUrl {
+            bannerImageView.image = UIImage(named: "\(String(describing: imageData))")
+        } else {
+            bannerImageView.image = UIImage(named: "banana")
+        }
+        foodLabel.text = product.name
+        let priceString = String(format: "%.2f₸", product.price)
+        priceLabel.text = priceString
+    }
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
