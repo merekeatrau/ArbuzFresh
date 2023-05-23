@@ -80,7 +80,7 @@ var products: [Category: [[Product]]] = [
             Product(id: 17, name: "Чеснок", category: .fruitsAndVegetables, subcategory: .herbs, type: .weight, price: 70.0, imageUrl: "garlic"),
             Product(id: 18, name: "Мята", category: .fruitsAndVegetables, subcategory: .herbs, type: .weight, price: 60.0, imageUrl: "mint"),
             Product(id: 19, name: "Петрушка", category: .fruitsAndVegetables, subcategory: .herbs, type: .weight, price: 40.0, imageUrl: "parsley"),
-            Product(id: 20, name: "Шпинат", category: .fruitsAndVegetables, subcategory: .herbs, type: .weight, price: 100.0, imageUrl: "spinach")
+            Product(id: 20, name: "Шпинат", category: .fruitsAndVegetables, subcategory: .herbs, type: .weight, price: 100.0, imageUrl: "shpinat")
         ]
     ],
     .milkProducts: [

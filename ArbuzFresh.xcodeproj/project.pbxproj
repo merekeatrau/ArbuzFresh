@@ -29,6 +29,7 @@
 		62DBECDD2A1BC52C0030336F /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBECDC2A1BC52C0030336F /* Product.swift */; };
 		62F0C0CC2A1CDBA5002B265C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F0C0CB2A1CDBA5002B265C /* SubscriptionViewController.swift */; };
 		62F0C0CF2A1CED39002B265C /* PriceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F0C0CE2A1CED39002B265C /* PriceButton.swift */; };
+		62F0C0D22A1D170A002B265C /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = 62F0C0D12A1D170A002B265C /* PhoneNumberKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				621EE3FA2A17D36E0014C203 /* SnapKit in Frameworks */,
+				62F0C0D22A1D170A002B265C /* PhoneNumberKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +222,7 @@
 			name = ArbuzFresh;
 			packageProductDependencies = (
 				621EE3F92A17D36E0014C203 /* SnapKit */,
+				62F0C0D12A1D170A002B265C /* PhoneNumberKit */,
 			);
 			productName = ArbuzFresh;
 			productReference = 621EE3DC2A17D0A00014C203 /* ArbuzFresh.app */;
@@ -251,6 +254,7 @@
 			mainGroup = 621EE3D32A17D0A00014C203;
 			packageReferences = (
 				621EE3F82A17D36E0014C203 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				62F0C0D02A1D170A002B265C /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 			);
 			productRefGroup = 621EE3DD2A17D0A00014C203 /* Products */;
 			projectDirPath = "";
@@ -514,6 +518,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		62F0C0D02A1D170A002B265C /* XCRemoteSwiftPackageReference "PhoneNumberKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/PhoneNumberKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -521,6 +533,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 621EE3F82A17D36E0014C203 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		62F0C0D12A1D170A002B265C /* PhoneNumberKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62F0C0D02A1D170A002B265C /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
+			productName = PhoneNumberKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 

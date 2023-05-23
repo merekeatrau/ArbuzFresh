@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhoneNumberKit
 
 class SubscriptionViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class SubscriptionViewController: UIViewController {
         scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
+    
+    let phoneNumberKit = PhoneNumberKit()
     
     private let proceedCheckoutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -73,7 +76,7 @@ class SubscriptionViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
-        proceedCheckoutButton.addTarget(self, action: #selector(cancelSubcriptionProcess), for: .touchUpInside)
+        proceedCheckoutButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         
         contentView.snp.makeConstraints { make in
             make.bottom.equalTo(proceedCheckoutButton.snp.bottom).offset(16)
@@ -122,6 +125,9 @@ class SubscriptionViewController: UIViewController {
             textField.inputView = pickerView
         case "Номер телефона":
             systemImageName = "phone"
+            textField.textContentType = .telephoneNumber
+            textField.keyboardType = .phonePad
+            textField.addTarget(self, action: #selector(formatPhoneNumber(_:)), for: .editingChanged)
         case "Срок подписки":
             systemImageName = "clock"
             
@@ -147,7 +153,7 @@ class SubscriptionViewController: UIViewController {
         
         return textField
     }
-
+    
     
     @objc private func handleDatePicker(sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
@@ -157,8 +163,42 @@ class SubscriptionViewController: UIViewController {
         }
     }
     
-    @objc func cancelSubcriptionProcess() {
-        dismiss(animated: true, completion: nil)
+    @objc private func formatPhoneNumber(_ textField: UITextField) {
+        if let text = textField.text {
+            do {
+                let phoneNumber = try phoneNumberKit.parse(text)
+                let formattedNumber = phoneNumberKit.format(phoneNumber, toType: .national, withPrefix: true)
+                textField.text = formattedNumber
+            } catch {
+                textField.text = text
+            }
+        }
+    }
+    
+    @objc private func showAlert() {
+        let alertController = UIAlertController(title: "Подтверждение подписки",
+                                                message: "Вы уверены, что хотите оформить подписку?",
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "Подтвердить", style: .default) { [weak self] _ in
+            let alertController = UIAlertController(title: "Подписка оформлена",
+                                                    message: "Поздравляем! Ваша подписка успешно оформлена.",
+                                                    preferredStyle: .alert)
+            
+            self?.present(alertController, animated: true, completion: nil)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                alertController.dismiss(animated: true) {
+                    let homeViewController = HomeViewController()
+                    self?.navigationController?.pushViewController(homeViewController, animated: true)
+                }
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -205,5 +245,3 @@ extension SubscriptionViewController: UIPickerViewDelegate, UIPickerViewDataSour
         }
     }
 }
-
-
