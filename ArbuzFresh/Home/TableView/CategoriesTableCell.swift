@@ -8,12 +8,12 @@
 import UIKit
 
 class CategoriesTableCell: UITableViewCell, SubcategoryCellDelegate {
-    
+
     static let identifier = "CategoriesTableCell"
     
-    var onSubcategoryDidSelect: ((Int) -> Void)?
+    var onSubcategoryDidSelect: ((Subcategory) -> Void)?
     
-    func didSelectSubcategoryCellDelegate(with subcategory: Int) {
+    func didSelectSubcategoryCellDelegate(with subcategory: Subcategory) {
         onSubcategoryDidSelect?(subcategory)
     }
 

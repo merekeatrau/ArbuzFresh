@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeDataDisplayManager: NSObject, UITableViewDataSource, UITableViewDelegate  {
     
-    var onSubcategoryDidSelect: ((Int) -> Void)?
+    var onSubcategoryDidSelect: ((Subcategory) -> Void)?
         
     func numberOfSections(in tableView: UITableView) -> Int {
         1

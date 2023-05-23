@@ -12,6 +12,12 @@ class ProductCollectionCell: UICollectionViewCell {
 
     static let reuseIdentifier = "ProductCollectionCell"
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bannerImageView.image = nil
+        productLabel.text = nil
+    }
+    
     private let bannerImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "banana"))
         imageView.backgroundColor = UIColor.systemGray6
@@ -81,22 +87,26 @@ class ProductCollectionCell: UICollectionViewCell {
         }
     }
     
-    func configure(with title: String, price: String) {
-        productLabel.text = title
-        priceButton.setTitle(price, for: .normal)
+    func configure(product: Product) {
+        bannerImageView.image = UIImage(named: "\(product.imageUrl)")
+        productLabel.text = "\(product.name), \(product.type.rawValue)"
+        let priceString = String(format: "%.2f₸", product.price)
+        priceButton.setTitle(priceString, for: .normal)
     }
 }
 
 class PriceButton: UIButton {
+    let spacing: CGFloat = 10.0
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        guard let imageView = imageView, let titleLabel = titleLabel else {
-            return
+        if let imageView = imageView, let titleLabel = titleLabel {
+            imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing/2)
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
+            
+            let insetAmount = spacing / 2 + min(imageView.frame.width, titleLabel.frame.width) / 2
+            contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
         }
-
-        let offset: CGFloat = (bounds.width - (titleLabel.frame.width + imageView.frame.width)) / 2
-        titleEdgeInsets = UIEdgeInsets(top: 0, left: -offset, bottom: 0, right: offset)
-        imageEdgeInsets = UIEdgeInsets(top: 0, left: offset, bottom: 0, right: -offset*2)
     }
 }

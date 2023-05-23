@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SubcategoryCellDelegate: AnyObject {
-    func didSelectSubcategoryCellDelegate(with subcategory: Int)
+    func didSelectSubcategoryCellDelegate(with subcategory: Subcategory)
 }
 
 class CategoriesCollectionView: UIView {
@@ -65,7 +65,7 @@ extension CategoriesCollectionView: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        subcategoryDelegate?.didSelectSubcategoryCellDelegate(with: 1)
+        subcategoryDelegate?.didSelectSubcategoryCellDelegate(with: subcategories[indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

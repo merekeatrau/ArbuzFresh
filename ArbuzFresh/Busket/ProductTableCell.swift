@@ -35,7 +35,7 @@ class ProductTableCell: UITableViewCell {
         let label = UILabel()
         label.text = "633 ₸"
         label.textColor = .black
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label

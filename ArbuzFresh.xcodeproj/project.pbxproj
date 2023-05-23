@@ -27,6 +27,7 @@
 		62DBECD92A1BB0F70030336F /* ProfileTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBECD82A1BB0F70030336F /* ProfileTableCell.swift */; };
 		62DBECDB2A1BB44A0030336F /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBECDA2A1BB44A0030336F /* ProfilePage.swift */; };
 		62DBECDD2A1BC52C0030336F /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DBECDC2A1BC52C0030336F /* Product.swift */; };
+		62F0C0CC2A1CDBA5002B265C /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F0C0CB2A1CDBA5002B265C /* SubscriptionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		62DBECD82A1BB0F70030336F /* ProfileTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCell.swift; sourceTree = "<group>"; };
 		62DBECDA2A1BB44A0030336F /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		62DBECDC2A1BC52C0030336F /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		62F0C0CB2A1CDBA5002B265C /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				621EE4102A1ABBDC0014C203 /* Food */,
 				626DE4772A1B9192009B31E8 /* Busket */,
 				62DBECD72A1BB0E90030336F /* Profile */,
+				62F0C0CA2A1CDB92002B265C /* Subscription */,
 				621EE3F72A17D1D00014C203 /* SupportingFiles */,
 				621EE3E82A17D0A00014C203 /* ArbuzFresh.xcdatamodeld */,
 			);
@@ -180,6 +183,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		62F0C0CA2A1CDB92002B265C /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				62F0C0CB2A1CDBA5002B265C /* SubscriptionViewController.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62F0C0CC2A1CDBA5002B265C /* SubscriptionViewController.swift in Sources */,
 				621EE3E42A17D0A00014C203 /* HomeViewController.swift in Sources */,
 				621EE3E02A17D0A00014C203 /* AppDelegate.swift in Sources */,
 				626DE4762A1B847A009B31E8 /* BusketViewController.swift in Sources */,

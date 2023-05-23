@@ -34,8 +34,8 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         setNavBar()
         setupTableView()
-        dataDisplayManager.onSubcategoryDidSelect = { [weak self] movieId in
-            self?.navigationController?.pushViewController(FoodViewController(), animated: true)
+        dataDisplayManager.onSubcategoryDidSelect = { [weak self] subcategory in
+            self?.navigationController?.pushViewController(FoodViewController(subcategory: subcategory), animated: true)
         }
     }
 

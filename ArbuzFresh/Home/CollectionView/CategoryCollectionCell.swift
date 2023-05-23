@@ -14,8 +14,9 @@ class CategoryCollectionCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 11, weight: .regular)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .black
+        label.numberOfLines = 0
         label.text = nil
         return label
     }()
