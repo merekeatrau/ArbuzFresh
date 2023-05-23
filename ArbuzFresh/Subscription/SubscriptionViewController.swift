@@ -50,7 +50,7 @@ class SubscriptionViewController: UIViewController {
             make.width.equalTo(scrollView)
         }
         
-        let fieldsData = ["Адрес доставки", "Выбор дня доставки", "Номер телефона", "Срок подписки", "Имя"]
+        let fieldsData = ["Адрес доставки", "День недели", "Номер телефона", "Срок подписки", "Имя"]
         var previousField: UITextField?
         
         for data in fieldsData {
@@ -113,12 +113,22 @@ class SubscriptionViewController: UIViewController {
         switch placeholder {
         case "Адрес доставки":
             systemImageName = "house"
-        case "Выбор дня доставки":
-            systemImageName = "calendar"
+        case "День недели":
+            systemImageName = "person"
+            
+            let pickerView = UIPickerView()
+            pickerView.delegate = self
+            pickerView.dataSource = self
+            textField.inputView = pickerView
         case "Номер телефона":
             systemImageName = "phone"
         case "Срок подписки":
             systemImageName = "clock"
+            
+            let pickerView = UIPickerView()
+            pickerView.delegate = self
+            pickerView.dataSource = self
+            textField.inputView = pickerView
         case "Имя":
             systemImageName = "person"
         default:
@@ -135,16 +145,9 @@ class SubscriptionViewController: UIViewController {
         textField.leftView = iconContainerView
         textField.leftViewMode = .always
         
-        if placeholder == "Период подписки" || placeholder == "Срок подписки" {
-            let datePicker = UIDatePicker()
-            datePicker.datePickerMode = .date
-            datePicker.preferredDatePickerStyle = .wheels
-            datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
-            textField.inputView = datePicker
-        }
-        
         return textField
     }
+
     
     @objc private func handleDatePicker(sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
@@ -172,3 +175,35 @@ extension UIView {
         return nil
     }
 }
+
+extension SubscriptionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let activeTextField = view.currentFirstResponder() as? UITextField, activeTextField.placeholder == "Срок подписки" {
+            return 12
+        }
+        return 7
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if let activeTextField = view.currentFirstResponder() as? UITextField, activeTextField.placeholder == "Срок подписки" {
+            return "\(row + 1) месяц"
+        }
+        return ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"][row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if let activeTextField = view.currentFirstResponder() as? UITextField {
+            if activeTextField.placeholder == "Срок подписки" {
+                activeTextField.text = "\(row + 1) месяц"
+            } else {
+                activeTextField.text = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"][row]
+            }
+        }
+    }
+}
+
+
